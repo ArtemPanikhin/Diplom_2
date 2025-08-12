@@ -4,6 +4,7 @@ import requests
 import generators
 from curl import Url
 from methods import MethodsOrder
+from data import *
 
 
 class TestCreateOrder:
@@ -51,7 +52,7 @@ class TestCreateOrder:
         with allure.step("Создание заказа"):
             response = MethodsOrder.create_order(generators.generate_order_body(ingredients), auth_header=return_register_data)
         with allure.step("Проверка кода ответа и сообщения"):
-            assert response.status_code == 400 and (response.json()['success'] == False) and (response.json()['message'] == 'Ingredient ids must be provided')
+            assert response.status_code == 400 and (response.json()['success'] == False) and (response.json()['message'] == INGREDIENT_ERROR)
 
 
     @allure.title("Создание заказа с неверным хешем ингредиентов")

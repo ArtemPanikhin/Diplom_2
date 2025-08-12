@@ -4,6 +4,7 @@ import requests
 from curl import Url
 from data import AuthorizationData, RandomAutorizationData
 from methods import MethodsUser
+from data import *
 
 
 class TestAuthUser:
@@ -21,5 +22,5 @@ class TestAuthUser:
         with allure.step('Отправка запроса с неверными данными'):
             response = requests.post(Url.login_user_url(), data_setup)
         with allure.step("Проверка кода ответа и сообщения"):
-            assert response.status_code == 401 and (response.json()['success'] == False) and (response.json()['message'] == 'email or password are incorrect')
+            assert response.status_code == 401 and (response.json()['success'] == False) and (response.json()['message'] == INCORRECT_DATA_ERROR)
 

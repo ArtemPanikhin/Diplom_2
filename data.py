@@ -1,6 +1,9 @@
 import generators
 
-
+INGREDIENT_ERROR = 'Ingredient ids must be provided'
+USER_EXIST_ERROR = 'User already exists'
+REQUIRED_FIELDS_ERROR = 'Email, password and name are required fields'
+INCORRECT_DATA_ERROR = 'email or password are incorrect'
 
 class DataForRegistration:
     reg_data = [

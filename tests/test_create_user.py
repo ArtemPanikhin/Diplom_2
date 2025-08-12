@@ -4,6 +4,7 @@ from curl import Url
 import pytest
 from data import DataForRegistration
 from methods import MethodsUser
+from data import *
 
 
 class TestsCreateCourier:
@@ -22,7 +23,7 @@ class TestsCreateCourier:
         with allure.step("Повторная регистрация пользователя с теми же данными"):
             response = MethodsUser.create_user(return_register_data)
         with allure.step("Проверка кода ответа и сообщения"):
-            assert response.status_code == 403 and (response.json()['success'] == False) and (response.json()['message'] == 'User already exists')
+            assert response.status_code == 403 and (response.json()['success'] == False) and (response.json()['message'] == USER_EXIST_ERROR)
 
 
     @allure.title('Проверка регистрации пользователя. Не заполнено одно из обязательных полей.')
@@ -31,4 +32,4 @@ class TestsCreateCourier:
         with allure.step('Отправка запроса с неполными данными'):
             response = requests.post(Url.create_user_url(), data_setup)
         with allure.step("Проверка кода ответа и сообщения"):
-            assert response.status_code == 403 and (response.json()['success'] == False) and (response.json()['message'] == 'Email, password and name are required fields')
+            assert response.status_code == 403 and (response.json()['success'] == False) and (response.json()['message'] == REQUIRED_FIELDS_ERROR)
